@@ -12,6 +12,7 @@ namespace Profile
     {
         public static string GetSubSymbolAndFindKey(string strToSub, out string kindsParent)
         {
+            Console.WriteLine("to add changes to pull req...");
             string[] symbolArray = { "Operator", "Condition", "Expression" };
             foreach (var symbol in symbolArray)
             {
