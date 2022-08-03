@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "oVfUVsAiu1OtCHgwBVUS5VqW8lzsGfgKvDJCSOaYEj3TgIW4LIE2eGErUW8r6ucL1q0SQcMs60WPqCjGHNSyJg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\user1\\Desktop\\QUERY-PROFILER-master\\QueryProfiler\\QueryProfiler.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user1\\.nuget\\packages\\microsoft.azure.kusto.language\\10.1.0\\microsoft.azure.kusto.language.10.1.0.nupkg.sha512",
+    "C:\\Users\\user1\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

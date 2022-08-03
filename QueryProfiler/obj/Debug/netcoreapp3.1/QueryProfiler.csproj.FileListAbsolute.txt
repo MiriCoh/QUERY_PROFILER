@@ -1,0 +1,13 @@
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\QueryProfiler.exe
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.AssemblyInfoInputs.cache
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.AssemblyInfo.cs
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Kusto.Language.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csprojAssemblyReference.cache
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csproj.CopyComplete
+C:\Users\user1\Desktop\QUERY-PROFILER-master\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csprojAssemblyReference.cache
+C:\Users\user1\Desktop\QUERY-PROFILER-master\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.AssemblyInfoInputs.cache
+C:\Users\user1\Desktop\QUERY-PROFILER-master\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.AssemblyInfo.cs
+C:\Users\user1\Desktop\QUERY-PROFILER-master\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csproj.CoreCompileInputs.cache
+C:\Users\user1\Desktop\QUERY-PROFILER-master\QueryProfiler\bin\Debug\netcoreapp3.1\QueryProfiler.exe
+C:\Users\user1\Desktop\QUERY-PROFILER-master\QueryProfiler\bin\Debug\netcoreapp3.1\Kusto.Language.dll
+C:\Users\user1\Desktop\QUERY-PROFILER-master\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csproj.CopyComplete
