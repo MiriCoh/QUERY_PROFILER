@@ -9,7 +9,6 @@ namespace QueryProfiler
     {
         
         public int SearchCounter { get; set; }
-        public int FilterCounter { get; set; }
         public int ExtendCounter { get; set; }
         public int JoinCounter { get; set; }
         public int LookupCounter { get; set; }
@@ -19,5 +18,9 @@ namespace QueryProfiler
         public int ProjectKeepCounter { get; set; }
         public int ContainsCounter { get; set; }
         public int ContainsCsCounter { get; set; }
+        public int Has_csCounter { get; internal set; }
+        public int Contains_csCounter { get; internal set; }
+        public int HasCounter { get; internal set; }
+        public int WhereCounter { get; internal set; }
     }
 }

@@ -5,64 +5,82 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 
 namespace QueryProfiler
 {
     class Program
     {
-
-        public static string GetSubSymbolAndFindKey(string strToSub)
-        {
-            string[] symbolArr = { "Operator", "Condition", "Expression" };
-            foreach (var symbol in symbolArr)
-            {
-                if(strToSub!=null)
-                if (strToSub.Contains(symbol))
-                {
-                    return strToSub.Substring(0, strToSub.Length - symbol.Length);
-                }
-            }
-            return null;
-        }
-        public static void GetProfile(string query)
+        private static void GetProfile(string query)
         {
             var profileScheme = new ProfileScheme();
-            var type = typeof(ProfileScheme);
-            var propertiesProfileScheme = new Dictionary<string, int>();
             var code = KustoCode.Parse(query);
-            var Operator = "Operator"; 
-            var Expression = "Expression";
-            var Condition = "Condition";
-            string tempSubKey = null;
-            foreach (PropertyInfo prop in type.GetProperties())
-            {
-                var subProp = prop.Name.Substring(0, prop.Name.Length - 7);
-                propertiesProfileScheme.Add(subProp, (int)prop.GetValue(profileScheme));
-            }
-            var tempCount = 0;
             SyntaxElement.WalkNodes(code.Syntax,
-           n =>
+           Operator =>
            {
-               var tempKind = n.Kind.ToString();
-               if (tempKind.Contains(Operator) || n.NameInParent == Expression || n.NameInParent == Condition)
+               switch (Operator.Kind.ToString())
                {
-                   tempSubKey = n.Kind.ToString();
-                   tempSubKey = GetSubSymbolAndFindKey(tempSubKey);
-                   if (tempSubKey != null && propertiesProfileScheme.ContainsKey(tempSubKey))
-                   {
-                       tempCount =propertiesProfileScheme[tempSubKey];
-                       propertiesProfileScheme[tempSubKey] = ++tempCount;
-                   }
+                   case "ContainsExpression":
+                       profileScheme.ContainsCounter += 1;
+                       break;
+                   case "ContainsCsExpression":
+                       profileScheme.Contains_csCounter += 1;
+                       break;
+                   case "HasExpression":
+                       profileScheme.HasCounter += 1;
+                       break;
+                   case "HasCsExpression":
+                       profileScheme.Has_csCounter += 1;
+                       break;
+                   case "InExpression":
+                       profileScheme.InCounter += 1;
+                       break;
+                   case "InCsExpression":
+                       profileScheme.InCounter += 1;
+                       break;
+                   default:
+                       break;
+               }
+               switch (Operator)
+               {
+                   case ProjectOperator t:
+                       profileScheme.ProjectCounter += 1;
+                       break;
+                   case ProjectAwayOperator t:
+                       profileScheme.ProjectAwayCounter += 1;
+                       break;
+                   case ProjectKeepOperator t:
+                       profileScheme.ProjectKeepCounter += 1;
+                       break;
+                   case SearchOperator t:
+                       profileScheme.SearchCounter += 1;
+                       break;
+                   case JoinOperator t:
+                       profileScheme.JoinCounter += 1;
+                       break;
+                   case LookupOperator t:
+                       profileScheme.LookupCounter += 1;
+                       break;
+                   case FilterOperator t:
+                       profileScheme.WhereCounter += 1;
+                       break;
+                   case ExtendOperator t:
+                       profileScheme.ExtendCounter += 1;
+                       break;
+                   default:
+                       break;
                }
            });
-            PrintProfile(propertiesProfileScheme);
+            PrintProfile(profileScheme);
         }
-        public static void PrintProfile(Dictionary<string,int> profile)
+        private static void PrintProfile(ProfileScheme profile)
         {
-            foreach (var prop in profile)
+            foreach (JPropertyDescriptor descriptor in TypeDescriptor.GetProperties(profile))
             {
-                Console.WriteLine("{0} Counter: {1}", prop.Key, prop.Value);
+                var name = descriptor.Name;
+                var value = descriptor.GetValue(profile);
+                Console.WriteLine("[{0} : {1}]", name, value);
             }
         }
         static void Main(string[] args)
