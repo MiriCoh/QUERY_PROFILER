@@ -13,7 +13,6 @@ namespace QueryProfiler
 {
     class Program
     {
-        //pull request
         private static void GetProfile(string query)
         {
             var profileScheme = new ProfileScheme();
