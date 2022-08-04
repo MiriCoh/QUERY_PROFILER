@@ -6,8 +6,7 @@ using System.Text;
 namespace QueryProfiler
 {
    public class ProfileScheme
-    {
-        
+    {     
         public int SearchCounter { get; set; }
         public int ExtendCounter { get; set; }
         public int JoinCounter { get; set; }

@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using System.Text;
 
 namespace QueryProfiler
 {
@@ -77,11 +78,9 @@ namespace QueryProfiler
         }
         private static void PrintProfile(ProfileScheme profile)
         {
-            foreach (JPropertyDescriptor descriptor in TypeDescriptor.GetProperties(profile))
+            foreach (var p in profile.GetType().GetProperties())
             {
-                var name = descriptor.Name;
-                var value = descriptor.GetValue(profile);
-                Console.WriteLine("[{0} : {1}]", name, value);
+                Console.WriteLine("["+p.Name + " : " + p.GetValue(profile)+"]");
             }
         }
         static void Main(string[] args)
