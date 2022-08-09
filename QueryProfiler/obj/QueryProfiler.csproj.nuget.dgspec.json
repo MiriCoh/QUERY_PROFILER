@@ -38,9 +38,17 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.Azure.Kusto.Data": {
+              "target": "Package",
+              "version": "[10.1.0, )"
+            },
             "Microsoft.Azure.Kusto.Language": {
               "target": "Package",
               "version": "[10.1.0, )"
+            },
+            "Microsoft.Azure.Kusto.Tools": {
+              "target": "Package",
+              "version": "[6.1.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
