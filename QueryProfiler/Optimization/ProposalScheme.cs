@@ -1,5 +1,4 @@
-﻿
-namespace QueryProfiler
+﻿namespace QueryProfiler
 {
     class ProposalScheme
     {

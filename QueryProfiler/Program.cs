@@ -18,6 +18,8 @@ using Kusto.Language.Editor;
 using Kusto.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
+using QueryProfiler.Profile;
+using QueryProfiler.Optimization;
 
 namespace QueryProfiler
 {
@@ -34,53 +36,84 @@ namespace QueryProfiler
             //    "| extend inputQuery = dim.BaseQuery, resultCount = dim.TotalRecords, durationMs = dim.durationMs, corelation = tostring(dim.ExecutionId), userAlias = tostring(dim.userAlias)" +
             //    "| project inputQuery, userAlias, corelation| join(FabricServiceOE)| project env_time, QueryRunDurationMs, ScopesCount, QueryResponseCount, QueryResponseTotalRecords," +
             //    " Query, Scopes, QueryLookupCount, QueryJoinCount, corelation = tostring(dim['CorrelationId'])) on corelation";
-              var demoQuery = "DynamicOE|where a contains b";
-           GetProfile(demoQuery);
-             KustoCode code1 = KustoCode.Parse(demoQuery);
+            KustoCode demoQuery = KustoCode.Parse("Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2");
+          aaa(demoQuery);
+            GetDatabaseTables2(demoQuery);
+            
+            ProfileAnalyzer.GetProfile("datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({'prop1':'a', 'prop2':'b'}), dynamic([5, 4, 3])]| mv-expand b, c");
+            DbProposal.InitializingDatabaseOptimalOperators();
+             OptimalProposalForQuery.GetListOfPropsalToQuery(demoQuery);
+       
             //GetDatabaseTableColumns(code);
             var globals = GlobalState.Default.WithDatabase(
              new DatabaseSymbol("db",
-                 new TableSymbol("Shapes", "(id: string, width: real, height: real)"),
-                 new FunctionSymbol("TallShapes", "{ Shapes | where width < height; }")
+                 new TableSymbol("Shapes", "(id: string, width: real, height: real)")//,
+               //  new FunctionSymbol("TallShapes", "{ Shapes | where width < height; }")
                  ));
-            var query = "TallShapes | where width > 5 | project id, width";
-            // var code = KustoCode.ParseAndAnalyze(query, globals);
-            KustoCode code = KustoCode.Parse(query);
-            // var a1 = GetDatabaseTableColumns1(code);
+            var query = "Shapes | where width > 5 | project id, width";
+             var code = KustoCode.ParseAndAnalyze(query, globals);
+            //KustoCode code = KustoCode.Parse(query);
+             var a1 = GetDatabaseTables2(code);
+            Console.WriteLine(a1);
             //var a2 = GetDatabaseTableColumns2(code);
             var globals1 = GlobalState.Default;
         }
-        private static void GetProfile(string query)
-        {
-            var profileScheme = new ProfileScheme();
-            var code = KustoCode.Parse(query);
-            SyntaxElement.WalkNodes(code.Syntax,
-           Operator =>
-           {
-               switch (Operator)
-               {
-                   case InExpression t:
-                       profileScheme.InCounter += 1;
-                       break;
-                   case JoinOperator t:
-                       profileScheme.JoinCounter += 1;
-                       break;
-                   case LookupOperator t:
-                       profileScheme.LookupCounter +=1;
-                       break;
-                   default:
-                       break;
-               }
-           });
-            PrintProfile(profileScheme);
-        }
-        private static void PrintProfile(ProfileScheme profile)
-        {
-            foreach (var p in profile.GetType().GetProperties())
+        public static string GetSubSymbolAndFindKey(string strToSub, out string kindsParent)
+        {if (strToSub.Contains("Operator") || strToSub.Contains("Condition") || strToSub.Contains("Expression"))
             {
-                Console.WriteLine("["+p.Name + " : " + p.GetValue(profile)+"]");
+                string[] symbolArr = { "Operator", "Condition", "Expression" };
+                foreach (var symbol in symbolArr)
+                {
+                    if (strToSub.Contains(symbol))
+                    {
+                        kindsParent = symbol;
+                        return strToSub.Substring(0, strToSub.Length - symbol.Length);
+                    }
+                }
+            }
+            kindsParent = null;
+            return null;
+        }
+        public static void aaa(KustoCode code)
+        {
+            var prop = new ProfileScheme();
+            List<string> profile = new List<string>();
+            int tempCount = 0;
+            string aa = " ";
+            string kindsParent = null;
+            SyntaxElement.WalkNodes(code.Syntax,
+                n =>
+                {
+                    var aaa = GetSubSymbolAndFindKey(n.Kind.ToString(), out aa);
+                    if (aaa != null)
+                    {
+                        PropertyInfo pinfo = typeof(ProfileScheme).GetProperty(aaa + "Counter");
+                        if (pinfo != null)
+                        {
+                            var value = pinfo.GetValue(prop);
+
+                            pinfo.SetValue(prop, 1);
+                        }
+                    }
+                    var tempSubKey = n.Kind.ToString();
+                    tempSubKey = GetSubSymbolAndFindKey(tempSubKey, out kindsParent);
+                    if (n.Kind.ToString() == "NameReference" && n.NameInParent == "Expression")
+                    {
+                        profile.Add(n.ToString());
+                    }
+                });
+            Console.WriteLine(prop);
+            foreach (var item in profile)
+            {
+                Console.WriteLine(item);
+            }
+            var t = typeof(ProfileScheme);
+            foreach (PropertyInfo p in t.GetProperties())
+            {
+                Console.WriteLine("[ " + p + " " +p.GetValue(prop)+ " ]");
             }
         }
+
         public static HashSet<ColumnSymbol> GetDatabaseTableColumns1(KustoCode code)
         {
             var columns = new HashSet<ColumnSymbol>();

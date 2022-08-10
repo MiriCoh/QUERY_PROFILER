@@ -1,14 +1,13 @@
-﻿using Kusto.Language.Syntax;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using System.Collections.Generic;
 namespace QueryProfiler
 {
    public class ProfileScheme
     {   // Operators
         public int JoinCounter { get; set; }
+        public int UnionCounter { get; set; }
         public int LookupCounter { get; set; }
+        public int MvExpandCounter { get; set; }
         public int InCounter { get; set; }
+        public List<string> Tables { get; set; }
     }
 }
