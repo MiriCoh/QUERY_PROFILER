@@ -2,7 +2,7 @@
 namespace QueryProfiler
 {
    public class ProfileScheme
-    {   // Operators
+    {  
         public int JoinCounter { get; set; }
         public int UnionCounter { get; set; }
         public int LookupCounter { get; set; }

@@ -1,10 +1,11 @@
 ﻿using Kusto.Language;
 using Kusto.Language.Syntax;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 namespace QueryProfiler.Optimization
 {
-    class OptimalProposalForQuery:DbProposal
+    class OptimalProposalForQuery:OptimalProposals
     {
         public static List<ProposalScheme> GetListOfPropsalToQuery(KustoCode code)
         {
@@ -16,36 +17,21 @@ namespace QueryProfiler.Optimization
                switch (Operator.Kind.ToString())
                {
                    case "ContainsExpression":
-                       proposalOptimizations.Add(dbProposalOptimization[0]);
-                       proposalOptimizations.Add(dbProposalOptimization[1]);
-                       break;
                    case "ContainsCsExpression":
-                       proposalOptimizations.Add(dbProposalOptimization[2]);
-                       break;
                    case "HasExpression":
-                       proposalOptimizations.Add(dbProposalOptimization[3]);
+                       proposalOptimizations.AddRange(OperatorTranslator(Operator.Kind, Operator.NameInParent));
                        break;
                    default:
                        break;
                }
                switch (Operator)
                {
-                   case HasAnyExpression t:
-                       proposalOptimizations.Add(dbProposalOptimization[4]);
-                       break;
-                   case InExpression t:
-                       proposalOptimizations.Add(dbProposalOptimization[5]);
-                       break;
-                   case LookupOperator t:
-                       proposalOptimizations.Add(dbProposalOptimization[6]);
-                       break;
-                   case JoinOperator t:
-                       proposalOptimizations.Add(dbProposalOptimization[7]);
-                       proposalOptimizations.Add(dbProposalOptimization[8]);
-                       proposalOptimizations.Add(dbProposalOptimization[9]);
-                       break;
-                   case SearchOperator t:
-                       proposalOptimizations.Add(dbProposalOptimization[10]);
+                   case HasAnyExpression t1:
+                   case InExpression t2:
+                   case LookupOperator t3:
+                   case JoinOperator t4:
+                   case SearchOperator t5:
+                       proposalOptimizations.AddRange(OperatorTranslator(Operator.Kind,Operator.NameInParent));
                        break;
                    default:
                        break;
@@ -53,6 +39,12 @@ namespace QueryProfiler.Optimization
            });
             PrintListOfPropsalToQuery(proposalOptimizations);
             return proposalOptimizations;
+        }
+        private static List<ProposalScheme> OperatorTranslator(SyntaxKind operat, string kind)
+        {
+            var subKindFromOperatorName = operat.ToString().Substring(0, operat.ToString().Length - kind.Length);
+            var Result= proposalsOptimization.FindAll(x => x.sourceOperator == subKindFromOperatorName);
+            return Result;
         }
         private static void PrintListOfPropsalToQuery(List<ProposalScheme> proposals)
         {

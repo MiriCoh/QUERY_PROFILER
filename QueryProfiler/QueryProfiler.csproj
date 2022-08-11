@@ -7,8 +7,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Kusto.Data" Version="10.1.0" />
+    <PackageReference Include="Microsoft.Azure.Kusto.Ingest" Version="10.1.0" />
     <PackageReference Include="Microsoft.Azure.Kusto.Language" Version="10.1.0" />
     <PackageReference Include="Microsoft.Azure.Kusto.Tools" Version="6.1.0" />
+    <PackageReference Include="MySql.Data" Version="8.0.30" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 

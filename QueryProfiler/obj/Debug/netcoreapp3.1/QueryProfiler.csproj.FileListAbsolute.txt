@@ -59,4 +59,15 @@ C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Google.Protobuf.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\K4os.Compression.LZ4.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\K4os.Compression.LZ4.Streams.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\K4os.Hash.xxHash.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\MySql.Data.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Ubiety.Dns.Core.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\ZstdNet.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Kusto.Ingest.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Microsoft.WindowsAzure.Storage.dll
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csproj.CoreCompileInputs.cache

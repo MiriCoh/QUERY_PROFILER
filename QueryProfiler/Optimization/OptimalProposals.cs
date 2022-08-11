@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 namespace QueryProfiler
 {
-    class DbProposal
+    class OptimalProposals
     {
-       public static List<ProposalScheme> dbProposalOptimization = new List<ProposalScheme>();
+       public static List<ProposalScheme> proposalsOptimization = new List<ProposalScheme>();
         public static void InitializingDatabaseOptimalOperators()
         {
-            dbProposalOptimization=new List<ProposalScheme>
+            proposalsOptimization = new List<ProposalScheme>
             {
             new ProposalScheme
             {    // רגיש לאותיות גדולות לכן החיפוש יהיה ממוקד יותר ומהיר יותר cs ערך בסיומת
@@ -63,19 +63,19 @@ namespace QueryProfiler
             }, //6
             new ProposalScheme
             {    
-                sourceOperator = "join",
+                sourceOperator = "Join",
                 ProposalOptimalOperator = "left join",
                 ProposalReason = "if one table is always smaller than the other, use it as the left (piped) side of the join"
             }, //7
             new ProposalScheme
             {    //
-                sourceOperator = "join",
+                sourceOperator = "Join",
                 ProposalOptimalOperator = "right join",
                 ProposalReason = "Use right table if one table is always smaller than the other, use it as the left (piped) side of the join"
             }, //8
                  new ProposalScheme
             {    //
-                sourceOperator = "join",
+                sourceOperator = "Join",
                 ProposalOptimalOperator = "lookup",
                 ProposalReason = "Use lookup instead of join because join needs more memory so lookup will be faster"
             }, //9

@@ -5,77 +5,50 @@ using System.Reflection;
 
 namespace QueryProfiler.Profile
 {
-  public class ProfileAnalyzer
+    public class ProfileAnalyzer
     {
-        public static ProfileScheme profileScheme = new ProfileScheme();
-
         public static void GetProfile(string query)
         {
+            var profileScheme = new ProfileScheme();
             var code = KustoCode.Parse(query);
             SyntaxElement.WalkNodes(code.Syntax,
            Operator =>
            {
-              
                switch (Operator)
                {
-                   case InExpression t:
-                       profileScheme.InCounter += 1;
+                   case InExpression t1:
+                   case JoinOperator t2:
+                   case LookupOperator t3:
+                   case UnionOperator t4:
+                   case MvExpandOperator t5:
+                       profileScheme = OperatorTranslator(profileScheme,Operator.Kind,Operator.NameInParent);
                        break;
-                   case JoinOperator t:
-                       profileScheme.JoinCounter += 1;
-                       break;
-                   case LookupOperator t:
-                       profileScheme.LookupCounter += 1;
-                       break;
-                   case UnionOperator t:
-                       profileScheme.UnionCounter += 1;
-                       break;
-                   case MvExpandOperator t:
-                       profileScheme.MvExpandCounter += 1;
-                       break;//mv-expand
                    default:
                        break;
                }
            });
             PrintProfile(profileScheme);
         }
-        private static void OperatorTranslator(SyntaxNode operat)
+        private static ProfileScheme OperatorTranslator(ProfileScheme profileScheme,SyntaxKind operat,string kind)
         {
-            var proppertyName = GetSubSymbol(operat.ToString());
-            if (proppertyName != null)
-            {
-                PropertyInfo pinfo = typeof(ProfileScheme).GetProperty(proppertyName + "Counter");
-                if (pinfo != null)
-                {
-                    var value = (int)pinfo.GetValue(profileScheme);
-                    pinfo.SetValue(profileScheme, value++);
-                }
-            }
+            var propertyName = GetSubSKind(operat.ToString(),kind);
+            var pinfo = typeof(ProfileScheme).GetProperty(propertyName + "Counter");
+            var value = (int)pinfo.GetValue(profileScheme);
+            pinfo.SetValue(profileScheme, value + 1);
+            return profileScheme;
         }
-        private static string GetSubSymbol(string strToSub)
+        private static string GetSubSKind(string strToSub,string kind)
         {
-            if (strToSub.Contains("Operator") || strToSub.Contains("Condition") || strToSub.Contains("Expression"))
-            {
-                string[] symbolArr = { "Operator", "Condition", "Expression" };
-                foreach (var symbol in symbolArr)
-                {
-                    if (strToSub.Contains(symbol))
-                    {
-                        return strToSub.Substring(0, strToSub.Length - symbol.Length);
-                    }
-                }
-            }
-            return null;
+           return strToSub.Substring(0, strToSub.Length - kind.Length);
         }
         private static void PrintProfile(ProfileScheme profile)
         {
             var t = typeof(ProfileScheme);
             foreach (PropertyInfo p in t.GetProperties())
             {
-                Console.WriteLine("[ "+p.Name+" "+p.GetValue(profile)+" ]");
+                Console.WriteLine("[ " + p.Name + " " + p.GetValue(profile) + " ]");
             }
         }
-
     }
-   
+
 }
