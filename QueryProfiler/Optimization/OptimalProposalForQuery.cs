@@ -1,11 +1,12 @@
 ﻿using Kusto.Language;
-using Kusto.Language.Symbols;
 using Kusto.Language.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace QueryProfiler.Optimization
 {
-    class OptimalProposalForQuery:OptimalProposals
+    class OptimalProposalForQuery
     {
         public static List<ProposalScheme> GetListOfPropsalToQuery(KustoCode code)
         {
@@ -31,25 +32,32 @@ namespace QueryProfiler.Optimization
                    case JoinOperator t4:
                    case SearchOperator t5:
                        proposalsOptimization.AddRange(OperatorTranslator(Operator.Kind,Operator.NameInParent));
+                       proposalsOptimization.ToList().ForEach(c => c.OperatorPosition = Operator.TextStart);
                        break;
                    default:
                        break;
                }
            });
             PrintListOfPropsalToQuery(proposalsOptimization);
+            foreach (var prop in proposalsOptimization)
+            {
+               // prop.ProposalPosition
+            }
             return proposalsOptimization;
         }
         private static List<ProposalScheme> OperatorTranslator(SyntaxKind operat, string kind)
         {
+            var propsals = new List<ProposalScheme>();
             var subKindFromOperatorName = operat.ToString().Substring(0, operat.ToString().Length - kind.Length);
-            var Result= proposalsOptimization.FindAll(x => x.sourceOperator == subKindFromOperatorName);
-            return Result;
+            var proposalsOptimization =  XmlOptimalProposals.GetProposalsOptimization().ProposalsOptimization;
+            var result=proposalsOptimization.FindAll(x => x.SourceOperator == subKindFromOperatorName);
+            return result;
         }
         private static void PrintListOfPropsalToQuery(List<ProposalScheme> proposals)
         {
             foreach (var proposal in proposals)
             {
-                Console.WriteLine("\n sourceOperator :" + proposal.sourceOperator
+                Console.WriteLine("\n sourceOperator :" + proposal.SourceOperator
                                 + "\n ProposalOptimalOperator :" + proposal.ProposalOptimalOperator 
                                 + "\n ProposalReason :" + proposal.ProposalReason);
             }

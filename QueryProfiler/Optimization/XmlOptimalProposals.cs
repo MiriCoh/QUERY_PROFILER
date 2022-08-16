@@ -1,19 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using System.IO;
-using System;
-
 namespace QueryProfiler.Optimization
 {
-    public static class Config
+    public static class XmlOptimalProposals
     {
-
-        // name of the .xml file
-        public static string CONFIG_FNAME = "config_proposal.xml";
+        public static string CONFIG_FNAME = "XmlProposal.xml";
 
         public static ProposalsOptimizations GetProposalsOptimization()
         {
-            if (!File.Exists(CONFIG_FNAME)) // create config file with default values
+            if (!File.Exists(CONFIG_FNAME)) 
             {
                 using (var fs = new FileStream(CONFIG_FNAME, FileMode.Create))
                 {
@@ -23,7 +18,7 @@ namespace QueryProfiler.Optimization
                     return sxml;
                 }
             }
-            else // read configuration from file
+            else 
             {
                 var xRoot = new XmlRootAttribute("ProposalsOptimizations");
                 using (var fs = new FileStream(CONFIG_FNAME, FileMode.Open))
@@ -46,25 +41,5 @@ namespace QueryProfiler.Optimization
                 return true;
             }
         }
-        [XmlRoot(elementName:"ProposalsOptimizations")]
-        public class ProposalsOptimizations
-        {
-            [XmlElement("ProposalScheme")]
-            public List<ProposalScheme> ProposalsOptimization = new List<ProposalScheme>();
-
-        }
-        [XmlRoot("ProposalScheme")]
-        public class ProposalScheme
-        {
-           [XmlElement]
-            public string sourceOperator { get; set; }
-            [XmlElement]
-            public string ProposalOptimalOperator { get; set; }
-            [XmlElement]
-            public string ProposalReason { get; set; }
-        }
-
-  
-
     }
 }
