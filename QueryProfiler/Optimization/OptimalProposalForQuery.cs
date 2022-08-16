@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 namespace QueryProfiler.Optimization
 {
-    class OptimalProposalForQuery:OptimalProposals
+    class OptimalProposalForQuery
     {
         public static List<ProposalScheme> GetListOfPropsalToQuery(KustoCode code)
         {
@@ -41,9 +41,11 @@ namespace QueryProfiler.Optimization
         }
         private static List<ProposalScheme> OperatorTranslator(SyntaxKind operat, string kind)
         {
+            var propsals = new List<ProposalScheme>();
             var subKindFromOperatorName = operat.ToString().Substring(0, operat.ToString().Length - kind.Length);
-            var Result= proposalsOptimization.FindAll(x => x.sourceOperator == subKindFromOperatorName);
-            return Result;
+            var proposalsOptimization =  XmlOptimalProposals.GetProposalsOptimization().ProposalsOptimization;
+            var result=proposalsOptimization.FindAll(x => x.sourceOperator == subKindFromOperatorName);
+            return result;
         }
         private static void PrintListOfPropsalToQuery(List<ProposalScheme> proposals)
         {
