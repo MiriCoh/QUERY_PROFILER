@@ -33,13 +33,11 @@ namespace QueryProfiler
     {
         static void Main(string[] args)
         {
-            var query = "Table1 | " +
-                "lookup (Table2) on CommonColumn, $left.Col1 == $right.Col2 ";
+            var query = "Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2 ";
             var parseCode = KustoCode.Parse(query);
             ProfileAnalyzer.GetProfile(query);
-            OptimalProposalForQuery.InitializingDatabaseOptimalOperators();
-            OptimalProposalForQuery.GetListOfPropsalToQuery(parseCode);
-            Console.WriteLine("config"+Config.GetProposalsOptimization());
+           var result= OptimalProposalForQuery.GetListOfPropsalToQuery(parseCode);
+            Console.WriteLine("config"+XmlOptimalProposals.GetProposalsOptimization());
         }
     }
 }

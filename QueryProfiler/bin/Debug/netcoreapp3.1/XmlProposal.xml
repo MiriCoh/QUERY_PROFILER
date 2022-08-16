@@ -7,7 +7,7 @@
 	</ProposalScheme>
 	<ProposalScheme>
 		<sourceOperator>Contains</sourceOperator>
-		<ProposalOptimalOperator>has</ProposalOptimalOperator>
+		<ProposalOptimalOperator>has/has_cs</ProposalOptimalOperator>
 		<ProposalReason>When looking for full tokens, has works better, since it doesn't look for substrings</ProposalReason>
 	</ProposalScheme>
 	<ProposalScheme>
@@ -31,5 +31,6 @@
 		<ProposalReason>Use lookup instead of join because join needs more memory so lookup will be faster</ProposalReason>
 	</ProposalScheme>
 </ProposalsOptimizations>
+
 
 
