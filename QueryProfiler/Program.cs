@@ -13,20 +13,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text;
-using Kusto.Cloud.Platform.Data;
-using Kusto.Data.Data;
-using Kusto.Data.Net.Client;
-using Kusto.Language.Editor;
-using Kusto.Data.Common;
-using System.Threading;
-using System.Threading.Tasks;
 using QueryProfiler.Profile;
 using QueryProfiler.Optimization;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.IO;
-
 namespace QueryProfiler
 {
     class Program
@@ -35,9 +23,9 @@ namespace QueryProfiler
         {
             var query = "Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2 ";
             var parseCode = KustoCode.Parse(query);
-            ProfileAnalyzer.GetProfile(query);
-           var result= OptimalProposalForQuery.GetListOfPropsalToQuery(parseCode);
-            Console.WriteLine("config"+XmlOptimalProposals.GetProposalsOptimization());
+           ProfileAnalyzer.GetProfile(query);
+           OptimalProposalForQuery.GetListOfPropsalToQuery(parseCode);
+           XmlOptimalProposals.GetProposalsOptimization();
         }
     }
 }

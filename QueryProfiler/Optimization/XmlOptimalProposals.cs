@@ -1,12 +1,9 @@
 ﻿using System.Xml.Serialization;
 using System.IO;
-using System;
-
 namespace QueryProfiler.Optimization
 {
     public static class XmlOptimalProposals
     {
-
         public static string CONFIG_FNAME = "XmlProposal.xml";
 
         public static ProposalsOptimizations GetProposalsOptimization()
@@ -44,9 +41,5 @@ namespace QueryProfiler.Optimization
                 return true;
             }
         }
-    
-
-  
-
     }
 }
