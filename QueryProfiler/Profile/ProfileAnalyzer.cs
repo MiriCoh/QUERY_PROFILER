@@ -1,19 +1,25 @@
 ﻿using Kusto.Language;
+using Kusto.Language.Symbols;
 using Kusto.Language.Syntax;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace QueryProfiler.Profile
 {
     public class ProfileAnalyzer
     {
-        public static void GetProfile(string query)
+        public static JObject GetProfile(string query)
         {
             var profileScheme = new ProfileScheme();
-            var code = KustoCode.Parse(query);
+            var code = KustoCode.Parse(query).Analyze();
             SyntaxElement.WalkNodes(code.Syntax,
            Operator =>
            {
+               if (Operator is Expression e && e.RawResultType is TableSymbol && Operator.Kind.ToString() == "NameReference")
+                   profileScheme.Tables.Add(e.ToString());
                switch (Operator)
                {
                    case InExpression t1:
@@ -28,14 +34,20 @@ namespace QueryProfiler.Profile
                }
            });
             PrintProfile(profileScheme);
+            return ConvertProfileToJson(profileScheme);
         }
         private static ProfileScheme OperatorTranslator(ProfileScheme profileScheme,SyntaxKind operat,string kind)
         {
             var propertyName = GetSubSKind(operat.ToString(),kind);
-            var pinfo = typeof(ProfileScheme).GetProperty(propertyName + "Counter");
-            var value = (int)pinfo.GetValue(profileScheme);
-            pinfo.SetValue(profileScheme, value + 1);
+            var propertyInfo = typeof(ProfileScheme).GetProperty(propertyName + "Counter");
+            var value = (int)propertyInfo.GetValue(profileScheme);
+            propertyInfo.SetValue(profileScheme, value + 1);
             return profileScheme;
+        }
+        private static JObject ConvertProfileToJson(ProfileScheme profile)
+        {
+            var ConvertProfileToJson = JsonConvert.SerializeObject(new { Profile = profile });
+            return JObject.Parse(ConvertProfileToJson); 
         }
         private static string GetSubSKind(string strToSub,string kind)
         {
@@ -46,7 +58,7 @@ namespace QueryProfiler.Profile
             var t = typeof(ProfileScheme);
             foreach (PropertyInfo p in t.GetProperties())
             {
-                Console.WriteLine("[ " + p.Name + " " + p.GetValue(profile) + " ]");
+                Console.WriteLine("[ " + p.Name + " " + p.GetValue(profile).ToString() + " ]");
             }
         }
     }

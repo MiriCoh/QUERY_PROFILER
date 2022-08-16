@@ -8,6 +8,6 @@ namespace QueryProfiler
         public int LookupCounter { get; set; }
         public int MvExpandCounter { get; set; }
         public int InCounter { get; set; }
-        public List<string> Tables { get; set; }
+        public List<string> Tables { get; set; } = new List<string>();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Kusto.Language;
+using Kusto.Language.Symbols;
 using Kusto.Language.Syntax;
-using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 namespace QueryProfiler.Optimization
@@ -9,8 +9,7 @@ namespace QueryProfiler.Optimization
     {
         public static List<ProposalScheme> GetListOfPropsalToQuery(KustoCode code)
         {
-            var proposalOptimizations = new List<ProposalScheme>();
-
+            var proposalsOptimization = new List<ProposalScheme>();
             SyntaxElement.WalkNodes(code.Syntax,
            Operator =>
            {
@@ -19,7 +18,7 @@ namespace QueryProfiler.Optimization
                    case "ContainsExpression":
                    case "ContainsCsExpression":
                    case "HasExpression":
-                       proposalOptimizations.AddRange(OperatorTranslator(Operator.Kind, Operator.NameInParent));
+                       proposalsOptimization.AddRange(OperatorTranslator(Operator.Kind, Operator.NameInParent));
                        break;
                    default:
                        break;
@@ -31,14 +30,14 @@ namespace QueryProfiler.Optimization
                    case LookupOperator t3:
                    case JoinOperator t4:
                    case SearchOperator t5:
-                       proposalOptimizations.AddRange(OperatorTranslator(Operator.Kind,Operator.NameInParent));
+                       proposalsOptimization.AddRange(OperatorTranslator(Operator.Kind,Operator.NameInParent));
                        break;
                    default:
                        break;
                }
            });
-            PrintListOfPropsalToQuery(proposalOptimizations);
-            return proposalOptimizations;
+            PrintListOfPropsalToQuery(proposalsOptimization);
+            return proposalsOptimization;
         }
         private static List<ProposalScheme> OperatorTranslator(SyntaxKind operat, string kind)
         {

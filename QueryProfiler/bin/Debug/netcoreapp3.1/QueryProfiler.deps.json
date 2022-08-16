@@ -12,6 +12,7 @@
           "Microsoft.Azure.Kusto.Ingest": "10.1.0",
           "Microsoft.Azure.Kusto.Language": "10.1.0",
           "Microsoft.Azure.Kusto.Tools": "6.1.0",
+          "Microsoft.Azure.Kusto.Tools.NETCore": "5.4.2",
           "MySql.Data": "8.0.30",
           "Newtonsoft.Json": "13.0.1"
         },
@@ -163,6 +164,7 @@
         }
       },
       "Microsoft.Azure.Kusto.Tools/6.1.0": {},
+      "Microsoft.Azure.Kusto.Tools.NETCore/5.4.2": {},
       "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
@@ -1348,6 +1350,13 @@
       "sha512": "sha512-GIo0R4W8pGJhkRiJ0NT0+ggfBXfz7K/rANbL7kZEKtNDRbyvrcyZ0QKkEE9kCCYc608ZcAoZ86xs8nlx42p5cg==",
       "path": "microsoft.azure.kusto.tools/6.1.0",
       "hashPath": "microsoft.azure.kusto.tools.6.1.0.nupkg.sha512"
+    },
+    "Microsoft.Azure.Kusto.Tools.NETCore/5.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yEp/VXHWoFO9NQuCB/zGc5205QeB56vF3G8JT2qyHtZVij+gbU5QxvaT13KnoYTmJ5ABU1NGbW73XZTdVj01Kg==",
+      "path": "microsoft.azure.kusto.tools.netcore/5.4.2",
+      "hashPath": "microsoft.azure.kusto.tools.netcore.5.4.2.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
       "type": "package",

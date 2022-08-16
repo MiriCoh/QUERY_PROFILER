@@ -71,3 +71,4 @@ C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Kusto.Ingest.dll
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Microsoft.WindowsAzure.Storage.dll
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csproj.CoreCompileInputs.cache
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\QueryProfiler.dll.config

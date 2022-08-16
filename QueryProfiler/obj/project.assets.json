@@ -159,6 +159,9 @@
       "Microsoft.Azure.Kusto.Tools/6.1.0": {
         "type": "package"
       },
+      "Microsoft.Azure.Kusto.Tools.NETCore/5.4.2": {
+        "type": "package"
+      },
       "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
         "type": "package",
         "compile": {
@@ -2208,6 +2211,67 @@
         "tools/netcoreapp2.1/runtimes/win/lib/netstandard2.0/System.IO.FileSystem.AccessControl.dll",
         "tools/netcoreapp2.1/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll",
         "tools/netcoreapp2.1/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll"
+      ]
+    },
+    "Microsoft.Azure.Kusto.Tools.NETCore/5.4.2": {
+      "sha512": "yEp/VXHWoFO9NQuCB/zGc5205QeB56vF3G8JT2qyHtZVij+gbU5QxvaT13KnoYTmJ5ABU1NGbW73XZTdVj01Kg==",
+      "type": "package",
+      "path": "microsoft.azure.kusto.tools.netcore/5.4.2",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "EULA-agreement.txt",
+        "MSFT.png",
+        "microsoft.azure.kusto.tools.netcore.5.4.2.nupkg.sha512",
+        "microsoft.azure.kusto.tools.netcore.nuspec",
+        "tools/Kusto.Cli.deps.json",
+        "tools/Kusto.Cli.dll",
+        "tools/Kusto.Cli.runtimeconfig.json",
+        "tools/Kusto.Cloud.Platform.Azure.dll",
+        "tools/Kusto.Cloud.Platform.dll",
+        "tools/Kusto.Data.dll",
+        "tools/Kusto.Ingest.dll",
+        "tools/LightIngest.deps.json",
+        "tools/LightIngest.dll",
+        "tools/LightIngest.runtimeconfig.json",
+        "tools/Microsoft.Data.SqlClient.dll",
+        "tools/Microsoft.IO.RecyclableMemoryStream.dll",
+        "tools/Microsoft.Identity.Client.Extensions.Msal.dll",
+        "tools/Microsoft.Identity.Client.dll",
+        "tools/Microsoft.IdentityModel.JsonWebTokens.dll",
+        "tools/Microsoft.IdentityModel.Logging.dll",
+        "tools/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll",
+        "tools/Microsoft.IdentityModel.Protocols.dll",
+        "tools/Microsoft.IdentityModel.Tokens.dll",
+        "tools/Microsoft.Win32.Registry.dll",
+        "tools/Microsoft.WindowsAzure.Storage.dll",
+        "tools/Newtonsoft.Json.dll",
+        "tools/System.Collections.Immutable.dll",
+        "tools/System.Configuration.ConfigurationManager.dll",
+        "tools/System.Diagnostics.DiagnosticSource.dll",
+        "tools/System.IdentityModel.Tokens.Jwt.dll",
+        "tools/System.Runtime.Caching.dll",
+        "tools/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/System.Security.AccessControl.dll",
+        "tools/System.Security.Cryptography.ProtectedData.dll",
+        "tools/System.Security.Permissions.dll",
+        "tools/System.Security.Principal.Windows.dll",
+        "tools/System.Text.Encoding.CodePages.dll",
+        "tools/runtimes/unix/lib/netcoreapp2.1/Microsoft.Data.SqlClient.dll",
+        "tools/runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.dll",
+        "tools/runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "tools/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll",
+        "tools/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll",
+        "tools/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll",
+        "tools/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll",
+        "tools/runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.dll",
+        "tools/runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll",
+        "tools/runtimes/win/lib/netcoreapp2.1/Microsoft.Data.SqlClient.dll",
+        "tools/runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.dll",
+        "tools/runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "tools/runtimes/win/lib/netstandard2.0/System.Runtime.Caching.dll",
+        "tools/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
@@ -6679,6 +6743,7 @@
       "Microsoft.Azure.Kusto.Ingest >= 10.1.0",
       "Microsoft.Azure.Kusto.Language >= 10.1.0",
       "Microsoft.Azure.Kusto.Tools >= 6.1.0",
+      "Microsoft.Azure.Kusto.Tools.NETCore >= 5.4.2",
       "MySql.Data >= 8.0.30",
       "Newtonsoft.Json >= 13.0.1"
     ]
@@ -6735,6 +6800,10 @@
           "Microsoft.Azure.Kusto.Tools": {
             "target": "Package",
             "version": "[6.1.0, )"
+          },
+          "Microsoft.Azure.Kusto.Tools.NETCore": {
+            "target": "Package",
+            "version": "[5.4.2, )"
           },
           "MySql.Data": {
             "target": "Package",
