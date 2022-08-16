@@ -29,17 +29,5 @@ namespace QueryProfiler.Optimization
                 }
             }
         }
-
-        public static bool SaveProposalScheme(ProposalScheme config)
-        {
-            if (!File.Exists(CONFIG_FNAME)) return false; // don't do anything if file doesn't exist
-
-            using (FileStream fs = new FileStream(CONFIG_FNAME, FileMode.Open))
-            {
-                var xs = new XmlSerializer(typeof(ProposalScheme));
-                xs.Serialize(fs, config);
-                return true;
-            }
-        }
     }
 }
