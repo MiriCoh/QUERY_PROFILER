@@ -29,19 +29,18 @@ namespace QueryProfiler
                 return true;
             if (ReferenceEquals(ps1, null) && ReferenceEquals(ps2, null))
                 return false;
-
-            return (ps1.OperatorPosition == ps2.OperatorPosition
-                 && ps1.ProposalOptimalOperator == ps2.ProposalOptimalOperator
-                 && ps1.ProposalReason == ps2.ProposalReason
-                 && ps1.SourceOperator == ps2.SourceOperator);
+            return ps1.OperatorPosition == ps2.OperatorPosition
+                && ps1.SourceOperator == ps2.SourceOperator
+                && ps1.ProposalOptimalOperator == ps2.ProposalOptimalOperator
+                && ps1.ProposalReason == ps2.ProposalReason;
         }
-        public int GetHashCode(ProposalScheme obj)
+        public int GetHashCode(ProposalScheme ps)
         {
-            if (ReferenceEquals(obj, null))
+            if (ReferenceEquals(ps, null))
                 return 0;
-            int hashCodeName = obj.SourceOperator == null ? 0 : obj.SourceOperator.GetHashCode();
-            int hasCodeAge = obj.ProposalReason.GetHashCode();
-            return hashCodeName ^ hasCodeAge;
+            int hashCodeSomeProp1 = ps.SourceOperator == null ? 0 : ps.SourceOperator.GetHashCode();
+            int hashCodeSomeProp2 = ps.ProposalReason.GetHashCode();
+            return hashCodeSomeProp1 ^ hashCodeSomeProp2;
         }
     }
 }

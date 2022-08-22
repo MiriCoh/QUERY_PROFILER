@@ -42,7 +42,7 @@ namespace QueryProfiler.Optimization
         {
             List<ProposalScheme> proposals = OperatorTranslator(Operator.Kind, Operator.NameInParent);
             proposals.ForEach(op => op.OperatorPosition = Operator.TextStart);
-            currentProposalsOptimization.SafeAddRange(proposals);
+            currentProposalsOptimization.AddRange(proposals);
             return currentProposalsOptimization;
         }
         private static List<ProposalScheme> OperatorTranslator(SyntaxKind operat, string kind)
