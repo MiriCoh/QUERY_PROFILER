@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="bin\Debug\netcoreapp3.1\XmlProposal.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.17.1" />
     <PackageReference Include="ICSharpCode.Decompiler" Version="7.2.1.6856" />
     <PackageReference Include="Microsoft.Azure.Kusto.Data" Version="10.1.0" />
@@ -20,6 +16,14 @@
     <PackageReference Include="Microsoft.TestPlatform" Version="17.3.0" />
     <PackageReference Include="MySql.Data" Version="8.0.30" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <!--<ItemGroup>
@@ -39,10 +43,6 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Proposals.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Proposals.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

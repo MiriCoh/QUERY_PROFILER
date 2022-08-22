@@ -1,9 +1,7 @@
 ﻿using Kusto.Cloud.Platform.Utils;
 using Kusto.Language;
 using Kusto.Language.Syntax;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 namespace QueryProfiler.Optimization
 {
    public class OptimalProposalForQuery
@@ -37,15 +35,8 @@ namespace QueryProfiler.Optimization
                    default:
                        break;
                }
-           });
-            PrintAddProposalsAndUpdatePositionProposalsOptimizationOfPropsalToQuery(currentProposalsOptimization);
-            var cpo = currentProposalsOptimization.Distinct();
-            List<ProposalScheme> p = new List<ProposalScheme>();
-            foreach (var item in cpo)
-            {
-                p.Add(item);
-            }
-                return p;
+           }); 
+            return currentProposalsOptimization;
         }
         private static List<ProposalScheme> AddProposalsAndUpdatePosition(List<ProposalScheme> currentProposalsOptimization, SyntaxNode Operator)
         {
@@ -61,15 +52,6 @@ namespace QueryProfiler.Optimization
             var result=proposalsOptimization.FindAll(proposal => proposal.SourceOperator == subKindFromOperatorName);
             return result;
         }
-        private static void PrintAddProposalsAndUpdatePositionProposalsOptimizationOfPropsalToQuery(List<ProposalScheme> proposals)
-        {
-            foreach (var proposal in proposals)
-            {
-                Console.WriteLine("\n sourceOperator :" + proposal.SourceOperator
-                                + "\n ProposalOptimalOperator :" + proposal.ProposalOptimalOperator 
-                                + "\n ProposalReason :" + proposal.ProposalReason
-                                 + "\n OperatorPosition :" + proposal.OperatorPosition);
-            }
-        }
+     
     }
 }

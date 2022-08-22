@@ -12,13 +12,15 @@ namespace QueryProfiler.Profile
     {
         public static ProfileScheme GetProfile(string query)
         {
-       
+
             var profileScheme = new ProfileScheme();
             var code = KustoCode.ParseAndAnalyze(query);
             SyntaxElement.WalkNodes(code.Syntax,
            Operator =>
            {
-               if (Operator is Expression e && e.RawResultType is TableSymbol && Operator.Kind.ToString() == "NameReference")
+               if (Operator is Expression e
+               && e.RawResultType is TableSymbol
+               && Operator.Kind.ToString() == "NameReference")
                    profileScheme.Tables.Add(e.ToString());
                switch (Operator)
                {
@@ -27,36 +29,27 @@ namespace QueryProfiler.Profile
                    case LookupOperator t3:
                    case UnionOperator t4:
                    case MvExpandOperator t5:
-                       profileScheme = OperatorTranslator(profileScheme,Operator.Kind,Operator.NameInParent);
+                       profileScheme = OperatorTranslator(profileScheme, Operator.Kind, Operator.NameInParent);
                        break;
                    default:
                        break;
                }
            });
-            PrintProfile(profileScheme);
             return profileScheme;
         }
-        private static ProfileScheme OperatorTranslator(ProfileScheme profileScheme,SyntaxKind operat,string kind)
+        private static ProfileScheme OperatorTranslator(ProfileScheme profileScheme, SyntaxKind operat, string kind)
         {
-            var propertyName = GetSubSKind(operat.ToString(),kind);
+            var propertyName = GetSubKind(operat.ToString(), kind);
             var propertyInfo = typeof(ProfileScheme).GetProperty(propertyName + "Counter");
             var value = (int)propertyInfo.GetValue(profileScheme);
             propertyInfo.SetValue(profileScheme, value + 1);
             return profileScheme;
         }
-        private static string GetSubSKind(string strToSub,string kind)
+        private static string GetSubKind(string strToSub, string kind)
         {
-           return strToSub.Substring(0, strToSub.Length - kind.Length);
+            return strToSub.Substring(0, strToSub.Length - kind.Length);
         }
-        private static void PrintProfile(ProfileScheme profile)
-        {
-            var t = typeof(ProfileScheme);
-            foreach (PropertyInfo p in t.GetProperties())
-            {
-                Console.WriteLine("[ " + p.Name + " " + p.GetValue(profile).ToString() + " ]");
-            }
-        }
-      
+
     }
 
 }
