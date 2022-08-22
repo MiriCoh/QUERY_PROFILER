@@ -9,5 +9,17 @@ namespace QueryProfiler
         public int MvExpandCounter { get; set; }
         public int InCounter { get; set; }
         public List<string> Tables { get; set; } = new List<string>();
+        public override bool Equals(object obj)
+        {
+            var ps = obj as ProfileScheme;
+            if (ps == null)
+                return false;
+            return ps.JoinCounter == JoinCounter
+                && ps.UnionCounter == UnionCounter
+                && ps.LookupCounter == LookupCounter
+                && ps.MvExpandCounter == MvExpandCounter
+                &&ps.InCounter==InCounter
+                &&ps.Tables.ToString()==Tables.ToString();
+        }
     }
 }

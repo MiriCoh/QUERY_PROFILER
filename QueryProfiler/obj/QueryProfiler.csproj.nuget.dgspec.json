@@ -38,6 +38,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[2.17.1, )"
+            },
+            "ICSharpCode.Decompiler": {
+              "target": "Package",
+              "version": "[7.2.1.6856, )"
+            },
             "Microsoft.Azure.Kusto.Data": {
               "target": "Package",
               "version": "[10.1.0, )"
@@ -57,6 +65,10 @@
             "Microsoft.Azure.Kusto.Tools.NETCore": {
               "target": "Package",
               "version": "[5.4.2, )"
+            },
+            "Microsoft.TestPlatform": {
+              "target": "Package",
+              "version": "[17.3.0, )"
             },
             "MySql.Data": {
               "target": "Package",
