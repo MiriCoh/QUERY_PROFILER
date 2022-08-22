@@ -1,16 +1,17 @@
-﻿using Kusto.Language;
+﻿using Kusto.Cloud.Platform.Utils;
+using Kusto.Language;
 using Kusto.Language.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 namespace QueryProfiler.Optimization
 {
-    class OptimalProposalForQuery
+   public class OptimalProposalForQuery
     {
-        public static List<ProposalScheme> GetListOfPropsalToQuery(KustoCode code)
+        public static List<ProposalScheme> GetListOfPropsalToQuery(string query)
         {
-            var proposalsOptimization = new List<ProposalScheme>();
+            var code = KustoCode.Parse(query);
+            var currentProposalsOptimization = new List<ProposalScheme>();
             SyntaxElement.WalkNodes(code.Syntax,
            Operator =>
            {
@@ -19,7 +20,7 @@ namespace QueryProfiler.Optimization
                    case "ContainsExpression":
                    case "ContainsCsExpression":
                    case "HasExpression":
-                       proposalsOptimization.AddRange(OperatorTranslator(Operator.Kind, Operator.NameInParent));
+                       currentProposalsOptimization = AddProposalsAndUpdatePosition(currentProposalsOptimization, Operator);
                        break;
                    default:
                        break;
@@ -31,35 +32,43 @@ namespace QueryProfiler.Optimization
                    case LookupOperator t3:
                    case JoinOperator t4:
                    case SearchOperator t5:
-                       proposalsOptimization.AddRange(OperatorTranslator(Operator.Kind,Operator.NameInParent));
-                       proposalsOptimization.ToList().ForEach(c => c.OperatorPosition = Operator.TextStart);
+                       currentProposalsOptimization = AddProposalsAndUpdatePosition(currentProposalsOptimization, Operator);
                        break;
                    default:
                        break;
                }
            });
-            PrintListOfPropsalToQuery(proposalsOptimization);
-            foreach (var prop in proposalsOptimization)
+            PrintAddProposalsAndUpdatePositionProposalsOptimizationOfPropsalToQuery(currentProposalsOptimization);
+            var cpo = currentProposalsOptimization.Distinct();
+            List<ProposalScheme> p = new List<ProposalScheme>();
+            foreach (var item in cpo)
             {
-               // prop.ProposalPosition
+                p.Add(item);
             }
-            return proposalsOptimization;
+                return p;
+        }
+        private static List<ProposalScheme> AddProposalsAndUpdatePosition(List<ProposalScheme> currentProposalsOptimization, SyntaxNode Operator)
+        {
+            List<ProposalScheme> proposals = OperatorTranslator(Operator.Kind, Operator.NameInParent);
+            proposals.ForEach(op => op.OperatorPosition = Operator.TextStart);
+            currentProposalsOptimization.SafeAddRange(proposals);
+            return currentProposalsOptimization;
         }
         private static List<ProposalScheme> OperatorTranslator(SyntaxKind operat, string kind)
         {
-            var propsals = new List<ProposalScheme>();
             var subKindFromOperatorName = operat.ToString().Substring(0, operat.ToString().Length - kind.Length);
             var proposalsOptimization =  XmlOptimalProposals.GetProposalsOptimization().ProposalsOptimization;
-            var result=proposalsOptimization.FindAll(x => x.SourceOperator == subKindFromOperatorName);
+            var result=proposalsOptimization.FindAll(proposal => proposal.SourceOperator == subKindFromOperatorName);
             return result;
         }
-        private static void PrintListOfPropsalToQuery(List<ProposalScheme> proposals)
+        private static void PrintAddProposalsAndUpdatePositionProposalsOptimizationOfPropsalToQuery(List<ProposalScheme> proposals)
         {
             foreach (var proposal in proposals)
             {
                 Console.WriteLine("\n sourceOperator :" + proposal.SourceOperator
                                 + "\n ProposalOptimalOperator :" + proposal.ProposalOptimalOperator 
-                                + "\n ProposalReason :" + proposal.ProposalReason);
+                                + "\n ProposalReason :" + proposal.ProposalReason
+                                 + "\n OperatorPosition :" + proposal.OperatorPosition);
             }
         }
     }

@@ -4,17 +4,17 @@ using Kusto.Language.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-
+using ICSharpCode.Decompiler.Util;
 namespace QueryProfiler.Profile
 {
     public class ProfileAnalyzer
     {
-        public static JObject GetProfile(string query)
+        public static ProfileScheme GetProfile(string query)
         {
+       
             var profileScheme = new ProfileScheme();
-            var code = KustoCode.Parse(query).Analyze();
+            var code = KustoCode.ParseAndAnalyze(query);
             SyntaxElement.WalkNodes(code.Syntax,
            Operator =>
            {
@@ -34,7 +34,7 @@ namespace QueryProfiler.Profile
                }
            });
             PrintProfile(profileScheme);
-            return ConvertProfileToJson(profileScheme);
+            return profileScheme;
         }
         private static ProfileScheme OperatorTranslator(ProfileScheme profileScheme,SyntaxKind operat,string kind)
         {
@@ -43,11 +43,6 @@ namespace QueryProfiler.Profile
             var value = (int)propertyInfo.GetValue(profileScheme);
             propertyInfo.SetValue(profileScheme, value + 1);
             return profileScheme;
-        }
-        private static JObject ConvertProfileToJson(ProfileScheme profile)
-        {
-            var ConvertProfileToJson = JsonConvert.SerializeObject(new { Profile = profile });
-            return JObject.Parse(ConvertProfileToJson); 
         }
         private static string GetSubSKind(string strToSub,string kind)
         {
@@ -61,6 +56,7 @@ namespace QueryProfiler.Profile
                 Console.WriteLine("[ " + p.Name + " " + p.GetValue(profile).ToString() + " ]");
             }
         }
+      
     }
 
 }

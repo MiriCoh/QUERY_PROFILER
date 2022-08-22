@@ -70,5 +70,14 @@ C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Kusto.Ingest.dll
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Microsoft.WindowsAzure.Storage.dll
-C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csproj.CoreCompileInputs.cache
 C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\QueryProfiler.dll.config
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\ICSharpCode.Decompiler.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\Microsoft.Win32.Registry.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\System.Reflection.Metadata.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\Microsoft.Win32.Registry.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.Properties.Resources.resources
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csproj.GenerateResource.cache
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.csproj.CoreCompileInputs.cache
+C:\Users\user1\source\repos\QueryProfiler\QueryProfiler\obj\Debug\netcoreapp3.1\QueryProfiler.Proposals.resources
