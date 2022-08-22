@@ -26,7 +26,7 @@ namespace OptimizationTests
         [TestMethod]
         public void TestGetListOfPropsalToQuery()
         {
-            var query = "R1 | join R2 on Region| join (R3 join R4 on Region) on Region";
+            var query = "R1 | join R2 on Region| join R3 on Region";
             var actual = OptimalProposalForQuery.GetListOfPropsalToQuery(query);
             var expected = new List<ProposalScheme> {
                 new ProposalScheme{

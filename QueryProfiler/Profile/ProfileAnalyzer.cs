@@ -1,11 +1,6 @@
 ﻿using Kusto.Language;
 using Kusto.Language.Symbols;
 using Kusto.Language.Syntax;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Reflection;
-using ICSharpCode.Decompiler.Util;
 namespace QueryProfiler.Profile
 {
     public class ProfileAnalyzer
