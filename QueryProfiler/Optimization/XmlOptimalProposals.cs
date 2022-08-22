@@ -1,32 +1,18 @@
 ﻿using System.Xml.Serialization;
-using System.IO;
+using System.Xml.Linq;
+
 namespace QueryProfiler.Optimization
 {
     public static class XmlOptimalProposals
     {
-        public static string CONFIG_FNAME = "XmlProposal.xml";
-
         public static ProposalsOptimizations GetProposalsOptimization()
         {
-            if (!File.Exists(CONFIG_FNAME)) 
+            XDocument doc = XDocument.Parse(Resources.Resources.XMLProposals);
+            using (var reader = doc.CreateReader())
             {
-                using (var fs = new FileStream(CONFIG_FNAME, FileMode.Create))
-                {
-                    var xs = new XmlSerializer(typeof(ProposalsOptimizations));
-                    var sxml = new ProposalsOptimizations();
-                    xs.Serialize(fs, sxml);
-                    return sxml;
-                }
-            }
-            else 
-            {
-                var xRoot = new XmlRootAttribute("ProposalsOptimizations");
-                using (var fs = new FileStream(CONFIG_FNAME, FileMode.Open))
-                {
-                    var xs = new XmlSerializer(typeof(ProposalsOptimizations),xRoot);
-                    var sc = (ProposalsOptimizations)xs.Deserialize(fs);
-                    return sc;
-                }
+                var xs = new XmlSerializer(typeof(ProposalsOptimizations));
+                var xd = xs.Deserialize(reader) as ProposalsOptimizations;
+                return xd;
             }
         }
     }
