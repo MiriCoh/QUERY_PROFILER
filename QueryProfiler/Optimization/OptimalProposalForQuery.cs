@@ -42,12 +42,12 @@ namespace QueryProfiler.Optimization
             currentProposalsOptimization = AddProposalsAndUpdatePosition(currentKeywords);
             return currentProposalsOptimization;
         }
-        private static List<ProposalScheme> AddProposalsAndUpdatePosition(Dictionary<string,int> currentProposalsOptimization)
+        private static List<ProposalScheme> AddProposalsAndUpdatePosition(Dictionary<string,int> currentProposalsOptimizations)
         {
             var proposals = new List<ProposalScheme>();
-            foreach (var keyword in currentProposalsOptimization)
+            foreach (var keyword in currentProposalsOptimizations)
             {
-               var proposal= proposals.Find(op => op.SourceOperator == keyword.Key);
+                var proposal= proposals.Find(op => op.SourceOperator == keyword.Key);
                 proposal.OperatorPosition = keyword.Value;
                 proposals.Add(proposal);
             }
