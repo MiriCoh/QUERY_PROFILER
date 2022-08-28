@@ -10,7 +10,7 @@ namespace QueryProfiler.Profile
         public static ProfileScheme GetProfile(string query)
         {
             if (!query.IsNotNullOrEmpty()) return new ProfileScheme();
-            var operators = new Dictionary<SyntaxKind, string>();
+            var operators = new List<OperatorSchema>();
             var profileScheme = new ProfileScheme();
             var code = KustoCode.ParseAndAnalyze(query);
             SyntaxElement.WalkNodes(code.Syntax,
@@ -27,7 +27,7 @@ namespace QueryProfiler.Profile
                    case LookupOperator operator3:
                    case UnionOperator operator4:
                    case MvExpandOperator operator5:
-                       operators.Add(Operator.Kind, Operator.NameInParent);
+                       operators.Add(new OperatorSchema { Operator = Operator.Kind,Kind=Operator.NameInParent});//Operator.Kind, Operator.NameInParent
                        break;
                    default:
                        break;
@@ -41,22 +41,22 @@ namespace QueryProfiler.Profile
         {
             var result = XmlComplexityLevel.GetComplexityLevel();
             int sumJoinUnionLookup = profileScheme.JoinCounter + profileScheme.LookupCounter + profileScheme.UnionCounter;
-            var level = result.complexitiesLevel.Find(x => x.JoinUnionLookupCounter.range.from <= sumJoinUnionLookup && x.JoinUnionLookupCounter.range.to >= sumJoinUnionLookup);
+            var level = result.complexitiesLevel.Find(x => x.JoinUnionLookupCounter.range.from <= sumJoinUnionLookup && x.JoinUnionLookupCounter.range.to>= sumJoinUnionLookup);
             profileScheme.complexityLevel = level.Level;
             return profileScheme;
         }
-        private static ProfileScheme OperatorTranslator(ProfileScheme profileScheme, Dictionary<SyntaxKind, string> operators)
+        private static ProfileScheme OperatorTranslator(ProfileScheme profileScheme, List<OperatorSchema> operators)
         {
             foreach (var keyword in operators)
             {
-                var propertyName = GetSubKind(keyword.Key.ToString(), keyword.Value);
+                var propertyName = GetOperatorKind(keyword.Operator.ToString(), keyword.Kind);
                 var propertyInfo = typeof(ProfileScheme).GetProperty(propertyName + "Counter");
                 var value = (int)propertyInfo.GetValue(profileScheme);
                 propertyInfo.SetValue(profileScheme, value + 1);
             }
             return profileScheme;
         }
-        private static string GetSubKind(string strToSub, string kind)
+        private static string GetOperatorKind(string strToSub, string kind)
         {
             return strToSub.Substring(0, strToSub.Length - kind.Length);
         }

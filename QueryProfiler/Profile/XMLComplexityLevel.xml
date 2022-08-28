@@ -3,16 +3,16 @@
 	
 	<complexityLevel>
 		<JoinUnionLookupCounter>
-			<Range>
-				<From>0</From>
-				<To>0</To>
-			</Range>
+			<range>
+				<from>0</from>
+				<to>0</to>
+			</range>
 	</JoinUnionLookupCounter>
 		<MvExpandInCounter>
-			<Range>
-				<From>0</From>
-				<To>0</To>
-			</Range>
+			<range>
+				<from>0</from>
+				<to>0</to>
+			</range>
 		</MvExpandInCounter>
 		<Level>0</Level>
 	</complexityLevel>
@@ -21,64 +21,64 @@
 
 	<complexityLevel>
 			<JoinUnionLookupCounter>
-				<Range>
-					<From>1</From>
-					<To>2</To>
-				</Range>
+				<range>
+					<from>1</from>
+					<to>2</to>
+				</range>
 			</JoinUnionLookupCounter>
 			<MvExpandInCounter>
-				<Range>
-					<From>1</From>
-					<To>2</To>
-				</Range>
+				<range>
+					<from>1</from>
+					<to>2</to>
+				</range>
 			</MvExpandInCounter>
 		<Level>1</Level>
 	</complexityLevel>
 
 	<complexityLevel>
 			<JoinUnionLookupCounter>
-				<Range>
-					<From>2</From>
-					<To>4</To>
-				</Range>
+				<range>
+					<from>2</from>
+					<to>4</to>
+				</range>
 			</JoinUnionLookupCounter>
 			<MvExpandInCounter>
-				<Range>
-					<From>1</From>
-					<To>3</To>
-				</Range>
+				<range>
+					<from>1</from>
+					<to>3</to>
+				</range>
 			</MvExpandInCounter>
 		<Level>2</Level>
 	</complexityLevel>
 
 	<complexityLevel>
 			<JoinUnionLookupCounter>
-				<Range>
-					<From>4</From>
-					<To>6</To>
-				</Range>
+				<range>
+					<from>4</from>
+					<to>6</to>
+				</range>
 			</JoinUnionLookupCounter>
 			<MvExpandInCounter>
-				<Range>
-					<From>1</From>
-					<To>3</To>
-				</Range>
+				<range>
+					<from>1</from>
+					<to>3</to>
+				</range>
 			</MvExpandInCounter>
 		<Level>3</Level>
 	</complexityLevel>
 	
 	<complexityLevel>
 			<JoinUnionLookupCounter>
-				<Range>
-					<From>6</From>
-					<To>100</To>
-				</Range>
+				<range>
+					<from>6</from>
+					<to>100</to>
+				</range>
 			</JoinUnionLookupCounter>
 			<MvExpandInCounter>
-				<Range>
-					<From>1</From>
-					<To>3</To>
-				</Range>
+				<range>
+					<from>1</from>
+					<to>3</to>
+				</range>
 			</MvExpandInCounter>
 		<Level>4</Level>
 	</complexityLevel>
