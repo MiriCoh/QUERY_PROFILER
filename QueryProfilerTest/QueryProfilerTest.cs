@@ -7,7 +7,7 @@ namespace QueryProfilerTest
     public class QueryProfilerTest
     {
         [TestMethod]
-        public void TesWithEmptyQueryt()
+        public void Test_QueryWithEmptyQueryt()
         {
             var query = "";
             var actual = QueryProfiler.Profile.ProfileAnalyzer.GetProfile(query);
@@ -25,7 +25,7 @@ namespace QueryProfilerTest
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void TestGetEmptyProfileToQuery()
+        public void Test_QueryWithNoExpression()
         {
             var query = "Table1";
             var actual = QueryProfiler.Profile.ProfileAnalyzer.GetProfile(query);
@@ -44,7 +44,7 @@ namespace QueryProfilerTest
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void TestGetProfileToQuery()
+        public void Test_QueryWithASameOperators()
         {
             var query = "Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2 ";
             var actual = QueryProfiler.Profile.ProfileAnalyzer.GetProfile(query); 
