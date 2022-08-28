@@ -33,7 +33,7 @@ namespace OptimizationTests
                 SourceOperator="Join",
                 ProposalOptimalOperator="lookup",
                 ProposalReason="Use lookup instead of join because join needs more memory so lookup will be faster",
-                OperatorPosition=5
+                OperatorPosition=24
                 },
                  new ProposalScheme{
                 SourceOperator="Join",

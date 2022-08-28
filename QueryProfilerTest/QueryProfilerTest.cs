@@ -66,6 +66,28 @@ namespace QueryProfilerTest
             };
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void Test_QueryWithTowJoins()
+        {
+            var query = "R1 | join R2 on Region| join R3 on Region ";
+            var actual = QueryProfiler.Profile.ProfileAnalyzer.GetProfile(query);
+            var expected = new ProfileScheme
+            {
+                complexityLevel = 1,
+                JoinCounter = 2,
+                UnionCounter = 0,
+                LookupCounter = 0,
+                MvExpandCounter = 0,
+                InCounter = 0,
+                Tables = new List<string>
+                {
+                    "R1",
+                    "R2",
+                    "R3"
+                }
+            };
+            Assert.AreEqual(expected, actual);
+        }
     }
 
 }

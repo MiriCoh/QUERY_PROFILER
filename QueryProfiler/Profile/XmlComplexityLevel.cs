@@ -37,15 +37,15 @@ namespace QueryProfiler.Profile
     [XmlRoot(elementName: "JoinUnionLookupCounter")]
     public class JoinUnionLookupCounter
     {
-        [XmlElement(elementName: "Range")]
-        public Range Range { get; set; }
+        [XmlElement(elementName: "range")]
+        public range range { get; set; }
     }
-    [XmlRoot(elementName: "Range")]
-    public class Range
+    [XmlRoot(elementName: "range")]
+    public class range
     {
-        [XmlElement(elementName: "From")]
-        public int From { get; set; }
-        [XmlElement(elementName: "To")]
-        public int To { get; set; }
+        [XmlElement(elementName: "from")]
+        public int from { get; set; }
+        [XmlElement(elementName: "to")]
+        public int to { get; set; }
     }
 }
