@@ -1,0 +1,8 @@
+# pack-refs with: peeled fully-peeled sorted 
+3bac1e1ec0b952494daf31f57a537e1fc3fa8e85 refs/heads/DLLWithAzureFunction
+aa386107ab7cd48e15d874a1ed68c251db428dd6 refs/heads/DLLWithAzureFunction_0
+24ae5dfbe55e52725be05addde71d21657162d40 refs/heads/master
+3bac1e1ec0b952494daf31f57a537e1fc3fa8e85 refs/pull/1/head
+8020ac9f77d996523b5a1ebfd7ad09401e920089 refs/pull/1/merge
+aa386107ab7cd48e15d874a1ed68c251db428dd6 refs/pull/2/head
+1a5259290f2ca10a88c09ea0c1d6ee59293e30cc refs/pull/2/merge
